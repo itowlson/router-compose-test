@@ -1,0 +1,14 @@
+package example:composition;
+
+let auth-h = new component:auth {...};
+let greet-h = new component:greet {...};
+let auth2 = auth-h["wasi:http/incoming-handler@0.2.0"];
+let greet2 = greet-h["wasi:http/incoming-handler@0.2.0"];
+
+let r = new component:router2 {
+    auth: auth2,
+    greet: greet2,
+    ...
+};
+
+export r as "wasi:http/incoming-handler@0.2.0";

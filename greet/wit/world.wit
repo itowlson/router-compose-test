@@ -1,0 +1,5 @@
+package component:greet@0.1.0;
+
+world example {
+    include fermyon:spin/http-trigger@2.0.0;
+}

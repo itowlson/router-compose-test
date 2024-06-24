@@ -1,0 +1,31 @@
+[package]
+name = "router2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+routefinder = "0.5.4"
+wit-bindgen-rt = { version = "0.26.0", features = ["bitflags"] }
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+codegen-units = 1
+opt-level = "s"
+debug = false
+strip = true
+lto = true
+
+[package.metadata.component]
+package = "component:router2"
+
+[package.metadata.component.dependencies]
+
+
+[package.metadata.component.registries]
+default = "https://fermyon.wa.dev"
+wasi = "https://wasi.wa.dev"
+
+[package.metadata.component.target.dependencies]
+"fermyon:spin" = "2.0.0"

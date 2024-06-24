@@ -1,0 +1,32 @@
+[package]
+name = "greet"
+authors = ["itowlson <ivan.towlson@fermyon.com>"]
+description = ""
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wit-bindgen-rt = { version = "0.25.0", features = ["bitflags"] }
+
+[workspace]
+
+[profile.release]
+codegen-units = 1
+opt-level = "s"
+debug = false
+strip = true
+lto = true
+
+[package.metadata.component.registries]
+default = "https://fermyon.wa.dev"
+
+[package.metadata.component]
+package = "component:greet"
+
+[package.metadata.component.dependencies]
+
+[package.metadata.component.target.dependencies]
+"fermyon:spin" = "2.0.0"
