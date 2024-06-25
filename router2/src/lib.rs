@@ -12,7 +12,11 @@ impl Guest for Component {
         rf.add("/auth", Handler::new(auth_handler)).expect("should have added route");
         rf.add("/greet", Handler::new(greet_handler)).expect("should have added route");
         rf.add("/*", Handler::new(not_found_handler)).expect("should have added route");
-        let handler = rf.get_handler(request.path_with_query().expect("should have a path")).expect("path should have matched a route");
+
+        let request_path = request.path_with_query().expect("should have a path");
+        let handler = rf
+            .best_match(&request_path)
+            .expect("path should have matched a route");
 
         handler.invoke(request, response_out);
     }
